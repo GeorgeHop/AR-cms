@@ -4,13 +4,13 @@
 // Set your brand colors
 $purple: #ab47bc;
 $red: #f44336;
-$brown: #757763;
+$soft-black: #263238;
 $beige-light: #eeeeee;
 $beige-lighter: #eff0eb;
 
 // Update Bulma's global variables
 $family-sans-serif: 'Nunito', sans-serif;
-$grey-dark: $brown;
+$grey-dark: $soft-black;
 $grey-light: $beige-light;
 $primary: $purple;
 $link: $red;
@@ -25,3 +25,7 @@ $input-shadow: none;
 
 // Bulma
 @import "~bulma/bulma.sass";
+
+// Custom styles
+@import "./custom-styles/sidebar";
+@import "./custom-styles/main";
