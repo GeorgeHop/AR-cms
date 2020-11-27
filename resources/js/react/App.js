@@ -5,15 +5,15 @@ import HomePage from "./pages/HomePage";
 import Header from "./components/main/Header";
 import Sidebar from "./components/main/Sidebar";
 import PageContainer from "./components/main/PageContainer";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
+    let location = window.location.pathname;
     const [title, setTitle] = React.useState(false);
 
     React.useEffect(() => getTitle(), []);
 
     const getTitle = () => {
-        let location = window.location.pathname;
-
         const titles = [
             {
                 path: '/',
@@ -30,12 +30,13 @@ function App() {
 
     return (
         <Router>
-            <Header/>
+            {location !== '/login' && <Header/>}
             <div className='main-content columns main-content-custom'>
-                <Sidebar/>
+                {location !== '/login' && <Sidebar/>}
                 <Switch>
                     <PageContainer title={title || ''}>
-                        <Route path={'/'} component={HomePage}/>
+                        <Route exact path={'/'} component={HomePage}/>
+                        <Route exact path={'/login'} component={LoginPage}/>
                     </PageContainer>
                 </Switch>
             </div>
