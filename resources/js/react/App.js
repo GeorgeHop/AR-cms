@@ -7,26 +7,12 @@ import Sidebar from "./components/main/Sidebar";
 import PageContainer from "./components/main/PageContainer";
 import LoginPage from "./pages/LoginPage";
 
+const RouteTitles = {
+    '/': 'Dashboard',
+};
+
 function App() {
-    let location = window.location.pathname;
-    const [title, setTitle] = React.useState(false);
-
-    React.useEffect(() => getTitle(), []);
-
-    const getTitle = () => {
-        const titles = [
-            {
-                path: '/',
-                title: 'Dashboard',
-            }
-        ];
-
-        titles.forEach((element) => {
-            if (element.path === location) {
-                return setTitle(element.title);
-            }
-        });
-    }
+    const location = window.location.pathname;
 
     return (
         <Router>
@@ -34,7 +20,7 @@ function App() {
             <div className='main-content columns main-content-custom'>
                 {location !== '/login' && <Sidebar/>}
                 <Switch>
-                    <PageContainer title={title || ''}>
+                    <PageContainer title={RouteTitles[location] || ''}>
                         <Route exact path={'/'} component={HomePage}/>
                         <Route exact path={'/login'} component={LoginPage}/>
                     </PageContainer>
