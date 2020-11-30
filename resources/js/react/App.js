@@ -16,22 +16,14 @@ function App() {
 
     return (
         <Router>
-            {location !== '/login' && <Header/>}
-            <div className='main-content columns main-content-custom'>
-                {location !== '/login' && <Sidebar/>}
-                <Switch>
-                    <PageContainer title={RouteTitles[location] || ''}>
-                        <Route exact path={'/'} component={HomePage}/>
-                        <Route exact path={'/login'} component={LoginPage}/>
-                    </PageContainer>
-                </Switch>
-            </div>
+            <Switch>
+                <Route exact path={'/login'} component={LoginPage}/>
+                <PageContainer title={RouteTitles[location] || ''}>
+                    <Route exact path={'/'} component={HomePage}/>
+                </PageContainer>
+            </Switch>
         </Router>
     );
 }
 
 export default App;
-
-if (document.getElementById('app')) {
-    ReactDOM.render(<App/>, document.getElementById('app'));
-}

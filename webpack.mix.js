@@ -11,5 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.react('resources/js/react/App.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+mix.react('resources/js/react/index.js', 'public/js/app.js')
+    .sass('resources/sass/app.scss', 'public/css')
+    .sourceMaps()
+    .browserSync('AR-cms.test')
+    .disableNotifications();

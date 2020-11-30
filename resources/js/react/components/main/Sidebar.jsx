@@ -1,14 +1,13 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
-
-const defaultUserImage = require('../../../../images/user.png');
+import {DefaultUserImage} from "../../helpers/constants";
 
 const Sidebar = ({userImage}) => {
     return (
-        <aside className='custom-sidebar column is-2 is-narrow-mobile is-fullheight section is-hidden-mobile'>
+        <aside className='custom-sidebar column is-2 is-narrow-mobile is-fullheight section is-hidden-mobile has-background-primary'>
             <div className='custom-menu-user-container navbar-brand'>
                 <figure className='image is-64x64'>
-                    <img className="is-rounded" alt='' src={userImage || defaultUserImage}/>
+                    <img className="is-rounded" alt='' src={userImage || DefaultUserImage}/>
                 </figure>
                 <NavLink className='navbar-item' to={'/'}>User Name</NavLink>
             </div>
