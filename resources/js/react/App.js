@@ -1,9 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import HomePage from "./pages/HomePage";
-import Header from "./components/main/Header";
-import Sidebar from "./components/main/Sidebar";
 import PageContainer from "./components/main/PageContainer";
 import LoginPage from "./pages/LoginPage";
 
