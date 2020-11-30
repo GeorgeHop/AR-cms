@@ -1,8 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import HomePage from "./pages/HomePage";
-import PageContainer from "./components/main/PageContainer";
-import LoginPage from "./pages/LoginPage";
+import MainLayout from "./layouts/MainLayout";
 
 const RouteTitles = {
     '/': 'Dashboard',
@@ -14,10 +13,15 @@ function App() {
     return (
         <Router>
             <Switch>
-                <Route exact path={'/login'} component={LoginPage}/>
-                <PageContainer title={RouteTitles[location] || ''}>
-                    <Route exact path={'/'} component={HomePage}/>
-                </PageContainer>
+
+                {/*Routes for main Layout*/}
+                <Route>
+                    <MainLayout appName={'AR-cms'} title={RouteTitles[location] || ''}>
+                        <Switch>
+                            <Route exact path={'/'} component={HomePage}/>
+                        </Switch>
+                    </MainLayout>
+                </Route>
             </Switch>
         </Router>
     );
