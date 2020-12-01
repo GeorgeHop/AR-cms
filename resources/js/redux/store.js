@@ -1,7 +1,7 @@
 import {createStore} from 'redux';
-import combineReducers from "./reducers/combineReducers";
+import reducers from "./reducers";
 
-const store = createStore(combineReducers);
-store.subscribe(() => store.getState());
+const store = createStore(reducers);
+// store.subscribe(() => store.getState());
 
 export default store;

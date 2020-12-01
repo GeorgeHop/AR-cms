@@ -1,5 +1,1 @@
-import {bool} from "prop-types";
-
-export const toggleSidebar = () => {
-    return {name: 'TOGGLE_SIDEBAR', type: bool}
-};
+export const toggleSidebar = () => ({name: 'TOGGLE_SIDEBAR'});
