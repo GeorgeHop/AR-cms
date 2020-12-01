@@ -3,12 +3,13 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import Nav from "react-bootstrap/Nav";
+import SidebarToggle from "./SidebarToggle";
 
 const Header = ({name}) => {
     return (
         <Navbar bg="light" expand="lg" className='main-header'>
-            <Navbar.Brand href="#home">{name}</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Brand href="#home"><SidebarToggle/> {name}</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Button variant="danger" className='m-1' size="sm">
                     Issues

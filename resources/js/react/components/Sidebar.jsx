@@ -1,9 +1,13 @@
 import React from 'react';
-import {Button} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import * as classnames from "classnames";
+import PropTypes from 'prop-types';
+import {connect} from "react-redux";
 
-const Sidebar = () => {
+const Sidebar = ({isOpen}) => {
     return (
-        <nav className="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+        <nav id='sidebar'
+             className={classnames({open: isOpen}, "col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar")}>
             <div className='m-1 w-100 user-info'>
                 User Name
             </div>
@@ -41,4 +45,14 @@ const Sidebar = () => {
     )
 }
 
-export default Sidebar;
+Sidebar.propTypes = {
+    isOpen: PropTypes.bool,
+};
+
+Sidebar.defaultProps = {
+    isOpen: true,
+};
+
+export default connect(state => ({
+    isOpen: state.sidebarReducer,
+}))(Sidebar);

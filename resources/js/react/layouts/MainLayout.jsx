@@ -1,22 +1,26 @@
 import React from 'react';
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
+import * as classnames from "classnames";
+import {connect} from "react-redux";
 
-const MainLayout = ({children, title, appName}) => {
+const MainLayout = ({isOpen, children, title, appName}) => {
     return (
         <>
-            <Header name={appName}/>
-            <div className="container-fluid">
-                <div className="row">
-                    <Sidebar/>
-                    <main role="main" className="col-sm-9 ml-sm-auto col-md-10 main">
+            <div className={'d-flex'}>
+                <Sidebar/>
+                <div id={'content'} className={classnames('bg-light', {open: isOpen})}>
+                    <Header name={appName}/>
+                    <div className="p-3 content-inner-shadow">
                         <h4 className='m-1'>{title}</h4>
                         {children}
-                    </main>
+                    </div>
                 </div>
             </div>
         </>
     )
 }
 
-export default MainLayout;
+export default connect(state => ({
+    isOpen: state.sidebarReducer,
+}))(MainLayout);

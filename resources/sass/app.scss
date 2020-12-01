@@ -2,4 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 @import "~bootstrap/scss/bootstrap";
-@import "menu";
+@import "buttons/sidebarToggle";
+@import "sidebar";
+@import "content";
