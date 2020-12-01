@@ -1,1 +1,1 @@
-export const toggleSidebar = () => ({name: 'TOGGLE_SIDEBAR'});
+export const toggleSidebar = () => ({type: 'TOGGLE_SIDEBAR'});
