@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import MainLayout from "./layouts/MainLayout";
 import {Provider} from "react-redux";
 import store from "./redux/store";
+import {Routes} from "./helpers/constants";
 
 export default function App() {
     return (
@@ -14,7 +15,7 @@ export default function App() {
                     <Route>
                         <MainLayout>
                             <Switch>
-                                <Route exact path={} component={HomePage}/>
+                                <Route exact path={Routes.Home} component={HomePage}/>
                             </Switch>
                         </MainLayout>
                     </Route>
