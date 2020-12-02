@@ -10906,6 +10906,7 @@ a.text-dark:focus {
 #sidebarToggle {
   width: 40px;
   height: 40px;
+  margin-right: 20px;
 }
 
 #sidebarToggle span {
@@ -10970,8 +10971,34 @@ a.text-dark:focus {
   }
 }
 
+html,
+body,
+#app {
+  height: 100%;
+}
+
+.ar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.card-shadow {
+  box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.25);
+}
+
 .sidebar-content {
   padding: 1.25rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  height: 80px;
+  box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.25);
 }
 
 .sidebar-panel {
@@ -11011,6 +11038,7 @@ a.text-dark:focus {
 /* Switcher */
 
 #sidebar {
+  padding-top: 5px;
   width: 280px;
   position: fixed;
   top: 0;
