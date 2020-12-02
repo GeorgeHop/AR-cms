@@ -1,7 +1,7 @@
 import React from 'react';
 import * as classnames from "classnames";
 import {connect} from "react-redux";
-import {toggleSidebar} from "../redux/actions/sidebarAction";
+import {toggleSidebar} from "../../redux/actions/sidebarAction";
 
 const SidebarToggle = ({isOpen, dispatch}) => {
     return (

@@ -3,8 +3,12 @@ import Button from "react-bootstrap/Button";
 import * as classnames from "classnames";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
+import {useHistory} from 'react-router-dom';
+import Routes from "../../routes/Routes";
 
 const Sidebar = ({isOpen}) => {
+    const history = useHistory();
+
     return (
         <nav id='sidebar'
              className={classnames({open: isOpen}, "col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar")}>
@@ -14,7 +18,8 @@ const Sidebar = ({isOpen}) => {
             <ul className="nav nav-pills flex-column">
                 <p className='m-1'>Admin</p>
                 <li className="nav-item">
-                    <Button variant='primary' className="m-1 w-100 p-1">Admins</Button>
+                    <Button variant='primary' onClick={() => history.push(Routes.AdminsList)}
+                            className="m-1 w-100 p-1">Admins</Button>
                 </li>
                 <li className="nav-item">
                     <Button variant='primary' className="m-1 w-100 p-1">Users</Button>
