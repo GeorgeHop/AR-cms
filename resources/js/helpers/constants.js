@@ -1,4 +1,8 @@
-export default {
+export const DefaultUserImage = '/images/user.png';
+
+export const SiteName = 'AR-CMS';
+
+export const Routes = {
     Dashboard: '/',
     AdminsList: '/admins',
     AdminCreate: '/admins-create',

@@ -5,7 +5,7 @@ import Badge from "react-bootstrap/Badge";
 import Nav from "react-bootstrap/Nav";
 import SidebarToggle from "./SidebarToggle";
 import {NavLink} from "react-router-dom";
-import Routes from "../../routes/Routes";
+import {Routes} from "../../helpers/constants";
 
 const Header = ({name}) => {
     return (

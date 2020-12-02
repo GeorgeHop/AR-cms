@@ -4,7 +4,7 @@ import * as classnames from "classnames";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {useHistory} from 'react-router-dom';
-import Routes from "../../routes/Routes";
+import {Routes} from "../../helpers/constants";
 
 const Sidebar = ({isOpen}) => {
     const history = useHistory();

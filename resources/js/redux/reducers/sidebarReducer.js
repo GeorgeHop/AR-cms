@@ -1,5 +1,5 @@
 export default function (state = true, action) {
-    switch (action.name) {
+    switch (action.type) {
         case 'TOGGLE_SIDEBAR':
             return !state;
         default:

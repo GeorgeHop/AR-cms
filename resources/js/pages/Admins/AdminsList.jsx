@@ -1,6 +1,6 @@
 import React from 'react';
 import PageHeader from "../../components/MainLayout/PageHeader";
-import Routes from "../../routes/Routes";
+import {Routes} from "../../helpers/constants";
 
 const AdminsList = () => {
     return (
