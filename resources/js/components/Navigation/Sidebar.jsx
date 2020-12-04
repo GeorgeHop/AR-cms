@@ -18,8 +18,10 @@ const Sidebar = ({isOpen}) => {
             <ul className="nav nav-pills flex-column">
                 <p className='m-1'>Admin</p>
                 <li className="nav-item">
-                    <Button variant='primary' onClick={() => history.push(Routes.AdminsList)}
-                            className="m-1 w-100 p-1">Admins</Button>
+                    <Button
+                        variant='primary'
+                        onClick={() => history.push(Routes.AdminsList)}
+                        className="m-1 w-100 p-1">Admins</Button>
                 </li>
                 <li className="nav-item">
                     <Button variant='primary' className="m-1 w-100 p-1">Users</Button>
@@ -31,7 +33,11 @@ const Sidebar = ({isOpen}) => {
             <ul className="nav nav-pills flex-column">
                 <p className='m-1'>Scenarist</p>
                 <li className="nav-item">
-                    <Button variant='primary' className="m-1 w-100 p-1">Scenario constructor</Button>
+                    <Button
+                        variant='primary'
+                        onClick={() => history.push(Routes.ScenarioConstructor)}
+                        className="m-1 w-100 p-1"
+                    >Scenario constructor</Button>
                 </li>
                 <li className="nav-item">
                     <Button variant='primary' className="m-1 w-100 p-1">List of scenarios</Button>

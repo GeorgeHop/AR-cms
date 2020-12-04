@@ -7,4 +7,5 @@ export const Routes = {
     AdminsList: '/admins',
     AdminCreate: '/admins-create',
     AdminEdit: (id = ':id') => `/admins-edit/${id}`,
+    ScenarioConstructor: '/scenario-constructor',
 };
