@@ -5,13 +5,13 @@ import * as classnames from "classnames";
 import {connect} from "react-redux";
 import {SiteName} from "../helpers/constants";
 
-const MainLayout = ({isOpen, children}) => (
+const MainLayout = ({isOpen, children, isLoading}) => (
     <>
         <div className={'d-flex'}>
             <Sidebar/>
             <div id={'content'} className={classnames('bg-light', {open: isOpen})}>
                 <Header name={SiteName}/>
-                <div className="p-3 content-inner-shadow">
+                <div className="h-100 p-3 content-inner-shadow">
                     {children}
                 </div>
             </div>

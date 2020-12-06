@@ -1,8 +1,41 @@
 import React from 'react';
 import PageHeader from "../../components/MainLayout/PageHeader";
 import {Routes} from "../../helpers/constants";
+import * as axios from "axios";
+import {NavLink, useHistory} from "react-router-dom";
 
 const AdminsList = () => {
+    const history = useHistory();
+    const [users, setUsers] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
+    const [currentPage, setCurrentPage] = React.useState(null);
+
+
+    React.useEffect(() => getData(), []);
+
+    const getData = () => {
+        axios.get(`api/admins`).then((res) => {
+            setUsers(res.data.data);
+            setLoading(false);
+        }).catch(console.log);
+    }
+
+    const deleteUser = id => {
+        axios.delete('api/admins/' + id)
+            .then(() => {
+                getData();
+            }).catch(console.log)
+    }
+
+    if (loading)
+        return (
+            <div className="h-100 d-flex justify-content-center" style={{alignItems: 'center'}}>
+                <div className="spinner-border text-primary" role="status">
+                    <span className="sr-only">Loading...</span>
+                </div>
+            </div>
+        )
+
     return (
         <div>
             <PageHeader title={'Admins List'} buttonLabel={'Add New Admin'} buttonRoute={Routes.AdminCreate}/>
@@ -16,53 +49,31 @@ const AdminsList = () => {
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Govnoed</td>
-                    <td>Admin</td>
-                    <td>
-                        <button type="button" className="btn btn-info btn-sm m-1">Edit</button>
-                        <button type="button" className="btn btn-danger btn-sm m-1">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Govnoed</td>
-                    <td>Admin</td>
-                    <td>
-                        <button type="button" className="btn btn-info btn-sm m-1">Edit</button>
-                        <button type="button" className="btn btn-danger btn-sm m-1">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Govnoed</td>
-                    <td>Admin</td>
-                    <td>
-                        <button type="button" className="btn btn-info btn-sm m-1">Edit</button>
-                        <button type="button" className="btn btn-danger btn-sm m-1">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Govnoed</td>
-                    <td>Admin</td>
-                    <td>
-                        <button type="button" className="btn btn-info btn-sm m-1">Edit</button>
-                        <button type="button" className="btn btn-danger btn-sm m-1">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Govnoed</td>
-                    <td>Admin</td>
-                    <td>
-                        <button type="button" className="btn btn-info btn-sm m-1">Edit</button>
-                        <button type="button" className="btn btn-danger btn-sm m-1">Delete</button>
-                    </td>
-                </tr>
+                {users.map((user, index) => (
+                    <tr key={index}>
+                        <th scope="row">{user.id}</th>
+                        <td>{user.user_name}</td>
+                        <td>{user.user_role}</td>
+                        <td>
+                            <button type="button" onClick={() => history.push(Routes.AdminEdit(user.id))}
+                                    className="btn btn-info btn-sm m-1">Edit
+                            </button>
+                            <button type="button" onClick={() => deleteUser(user.id)}
+                                    className="btn btn-danger btn-sm m-1">Delete
+                            </button>
+                        </td>
+                    </tr>
+                ))}
                 </tbody>
             </table>
+
+            <nav>
+                <ul className='pagination'>
+                    <li className='page-item'><NavLink className='page-link' to={'/'}>Previous</NavLink></li>
+                    <li className='page-item'><NavLink className='page-link' to={'/'}>1</NavLink></li>
+                    <li className='page-item'><NavLink className='page-link' to={'/'}>Next</NavLink></li>
+                </ul>
+            </nav>
         </div>
     );
 }
