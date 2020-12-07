@@ -1,37 +1,36 @@
 import React from 'react';
 import PageHeader from "../../components/MainLayout/PageHeader";
 import {Routes} from "../../helpers/constants";
-import {NavLink, useHistory} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import Pagination from "../../components/MainLayout/Pagination";
 import {API} from "../../helpers/API";
 
 const AdminsList = () => {
-    const history = useHistory();
     const [users, setUsers] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
-    const [currentPage, setCurrentPage] = React.useState(null);
-    const [pageLinks, setPageLinks] = React.useState([]);
-    const [paginationData, setPaginationData] = React.useState([]);
+    const [currentPage, setCurrentPage] = React.useState(1);
+    const [lastPage, setLastPage] = React.useState();
 
-
-    React.useEffect(() => getData(), []);
-
-    const getData = () => {
-        API.get(`/admins`).then((res) => {
-            console.log(res.data)
-            setPaginationData(res.data);
-            setPageLinks(res.data.links);
-            setUsers(res.data.data);
-            setLoading(false);
-        }).catch(console.log);
-    }
+    React.useEffect(() => pageChange(), []);
 
     const deleteUser = id => {
         API.delete('/admins/' + id)
             .then(() => {
-                getData();
+                pageChange();
             }).catch(console.log);
     }
+
+    const pageChange = pageId => {
+        API.get(`/admins?page=${pageId}`)
+            .then((res) => {
+                setLastPage(res.data.last_page);
+                setCurrentPage(res.data.current_page);
+                setUsers(res.data.data);
+                setLoading(false);
+            })
+            .catch(console.log)
+    }
+
 
     if (loading)
         return (
@@ -73,7 +72,11 @@ const AdminsList = () => {
                 </tbody>
             </table>
 
-            <Pagination paginationData={paginationData}/>
+            <Pagination
+                currentPage={currentPage}
+                lastPage={lastPage}
+                pageChange={(pageId) => pageChange(pageId)}
+            />
         </div>
     );
 }
