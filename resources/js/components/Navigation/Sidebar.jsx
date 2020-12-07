@@ -20,7 +20,7 @@ const Sidebar = ({isOpen}) => {
                 <li className="nav-item">
                     <Button
                         variant='primary'
-                        onClick={() => history.push(Routes.AdminsList)}
+                        onClick={() => history.push(Routes.Admins)}
                         className="m-1 w-100 p-1">Admins</Button>
                 </li>
                 <li className="nav-item">

@@ -1,7 +1,13 @@
 import axios from 'axios';
+import {ApiUrl, CsrfToken} from "./constants";
 
-const API_URL = 'http://AR-CMS.test/api';
-export const API = axios.create({
-    baseURL: API_URL
+const instance = axios.create({
+    baseURL: ApiUrl,
 });
 
+export const CsrfInterceptor = instance.interceptors.request.use(config => {
+    config.headers['X-CSRF-TOKEN'] = CsrfToken;
+    return config;
+});
+
+export default instance;

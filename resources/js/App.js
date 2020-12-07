@@ -22,9 +22,9 @@ const App = () => (
                             {/* Dashboard */}
                             <Route exact path={Routes.Dashboard} component={HomePage}/>
                             {/* Admin pages */}
-                            <Route exact path={Routes.AdminsList} component={AdminsList}/>
-                            <Route exact path={Routes.AdminEdit()} component={AdminDetails}/>
-                            <Route exact path={Routes.AdminCreate} component={AdminDetails}/>
+                            <Route exact path={Routes.Admins} component={AdminsList}/>
+                            <Route exact path={Routes.AdminsEdit()} component={AdminDetails}/>
+                            <Route exact path={Routes.AdminsCreate} component={AdminDetails}/>
 
                             <Route exact path={Routes.ScenarioConstructor} component={ScenarioConstructor}/>
                         </Switch>

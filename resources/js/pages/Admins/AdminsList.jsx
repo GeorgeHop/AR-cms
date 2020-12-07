@@ -3,7 +3,7 @@ import PageHeader from "../../components/MainLayout/PageHeader";
 import {Routes} from "../../helpers/constants";
 import {NavLink} from "react-router-dom";
 import Pagination from "../../components/MainLayout/Pagination";
-import {API} from "../../helpers/API";
+import API from "../../helpers/API";
 
 const AdminsList = () => {
     const [users, setUsers] = React.useState([]);
@@ -43,15 +43,15 @@ const AdminsList = () => {
 
     return (
         <div>
-            <PageHeader title={'Admins List'} buttonLabel={'Add New Admin'} buttonRoute={Routes.AdminCreate}/>
+            <PageHeader title={'Admins List'} buttonLabel={'Add New Admin'} buttonRoute={Routes.AdminsCreate}/>
             <table className="table">
                 <thead>
-                <tr>
-                    <th>id</th>
-                    <th>Username</th>
-                    <th>User role</th>
-                    <th>Actions</th>
-                </tr>
+                    <tr>
+                        <th>id</th>
+                        <th>Username</th>
+                        <th>User role</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
                 {users.map((user, index) => (
@@ -60,7 +60,7 @@ const AdminsList = () => {
                         <td>{user.user_name}</td>
                         <td>{user.user_role}</td>
                         <td>
-                            <NavLink type="button" to={Routes.AdminEdit(user.id)}
+                            <NavLink type="button" to={Routes.AdminsEdit(user.id)}
                                      className="btn btn-info btn-sm m-1">Edit
                             </NavLink>
                             <button type="button" onClick={() => deleteUser(user.id)}

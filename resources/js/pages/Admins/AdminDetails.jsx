@@ -2,7 +2,7 @@ import React from "react";
 import PageHeader from "../../components/MainLayout/PageHeader";
 import {useHistory} from 'react-router-dom';
 import {Routes} from "../../helpers/constants";
-import {API} from "../../helpers/API";
+import API from "../../helpers/API";
 
 const AdminDetails = props => {
     const location = window.location;
@@ -25,7 +25,7 @@ const AdminDetails = props => {
             };
 
             API.post('/admins', userData)
-                .then(history.push(Routes.AdminsList))
+                .then(history.push(Routes.Admins))
                 .catch(console.log)
         }
     };
