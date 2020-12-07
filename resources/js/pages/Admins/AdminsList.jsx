@@ -4,6 +4,7 @@ import {Routes} from "../../helpers/constants";
 import {NavLink} from "react-router-dom";
 import Pagination from "../../components/MainLayout/Pagination";
 import API from "../../helpers/API";
+import PaginationTable from "../../components/pagination/PaginationTable";
 
 const AdminsList = () => {
     const [users, setUsers] = React.useState([]);
@@ -77,6 +78,9 @@ const AdminsList = () => {
                 lastPage={lastPage}
                 pageChange={(pageId) => pageChange(pageId)}
             />
+
+
+            <PaginationTable url={'/admins'}/>
         </div>
     );
 }
