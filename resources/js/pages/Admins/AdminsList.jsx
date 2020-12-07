@@ -1,30 +1,36 @@
 import React from 'react';
 import PageHeader from "../../components/MainLayout/PageHeader";
 import {Routes} from "../../helpers/constants";
-import * as axios from "axios";
 import {NavLink, useHistory} from "react-router-dom";
+import Pagination from "../../components/MainLayout/Pagination";
+import {API} from "../../helpers/API";
 
 const AdminsList = () => {
     const history = useHistory();
     const [users, setUsers] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
     const [currentPage, setCurrentPage] = React.useState(null);
+    const [pageLinks, setPageLinks] = React.useState([]);
+    const [paginationData, setPaginationData] = React.useState([]);
 
 
     React.useEffect(() => getData(), []);
 
     const getData = () => {
-        axios.get(`api/admins`).then((res) => {
+        API.get(`/admins`).then((res) => {
+            console.log(res.data)
+            setPaginationData(res.data);
+            setPageLinks(res.data.links);
             setUsers(res.data.data);
             setLoading(false);
         }).catch(console.log);
     }
 
     const deleteUser = id => {
-        axios.delete('api/admins/' + id)
+        API.delete('/admins/' + id)
             .then(() => {
                 getData();
-            }).catch(console.log)
+            }).catch(console.log);
     }
 
     if (loading)
@@ -55,9 +61,9 @@ const AdminsList = () => {
                         <td>{user.user_name}</td>
                         <td>{user.user_role}</td>
                         <td>
-                            <button type="button" onClick={() => history.push(Routes.AdminEdit(user.id))}
-                                    className="btn btn-info btn-sm m-1">Edit
-                            </button>
+                            <NavLink type="button" to={Routes.AdminEdit(user.id)}
+                                     className="btn btn-info btn-sm m-1">Edit
+                            </NavLink>
                             <button type="button" onClick={() => deleteUser(user.id)}
                                     className="btn btn-danger btn-sm m-1">Delete
                             </button>
@@ -67,13 +73,7 @@ const AdminsList = () => {
                 </tbody>
             </table>
 
-            <nav>
-                <ul className='pagination'>
-                    <li className='page-item'><NavLink className='page-link' to={'/'}>Previous</NavLink></li>
-                    <li className='page-item'><NavLink className='page-link' to={'/'}>1</NavLink></li>
-                    <li className='page-item'><NavLink className='page-link' to={'/'}>Next</NavLink></li>
-                </ul>
-            </nav>
+            <Pagination paginationData={paginationData}/>
         </div>
     );
 }
