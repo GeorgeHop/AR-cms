@@ -24,7 +24,11 @@ const Sidebar = ({isOpen}) => {
                         className="m-1 w-100 p-1">Admins</Button>
                 </li>
                 <li className="nav-item">
-                    <Button variant='primary' className="m-1 w-100 p-1">Users</Button>
+                    <Button
+                        variant='primary'
+                        className="m-1 w-100 p-1"
+                        onClick={() => history.push(Routes.UsersList)}
+                    >Users</Button>
                 </li>
                 <li className="nav-item">
                     <Button variant='primary' className="m-1 w-100 p-1">Subscribed users</Button>

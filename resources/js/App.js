@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import AdminsList from "./pages/Admins/AdminsList";
 import AdminDetails from "./pages/Admins/AdminDetails";
 import ScenarioConstructor from "./pages/ScenarionConstructor";
+import UsersList from "./pages/Users/UsersList";
 
 const App = () => (
     <Provider store={store}>
@@ -25,6 +26,8 @@ const App = () => (
                             <Route exact path={Routes.Admins} component={AdminsList}/>
                             <Route exact path={Routes.AdminsEdit()} component={AdminDetails}/>
                             <Route exact path={Routes.AdminsCreate} component={AdminDetails}/>
+                            {/* Users pages */}
+                            <Route exact path={Routes.UsersList} component={UsersList}/>
 
                             <Route exact path={Routes.ScenarioConstructor} component={ScenarioConstructor}/>
                         </Switch>

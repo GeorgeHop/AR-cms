@@ -2,14 +2,17 @@ import React from "react";
 import Pagination from "../MainLayout/Pagination";
 import API from "../../helpers/API";
 import PropTypes from "prop-types";
+import Loader from "../Loader";
 
 function PaginationTable(props) {
-    const page = (new URLSearchParams(window.location.search)).get('page') || 1;
-
+    // const page = (new URLSearchParams(window.location.search)).get('page') || 1;
     const [paginationData, setPaginationData] = React.useState(null);
     const [error, setError] = React.useState(false);
 
-    React.useEffect(() => {
+
+    React.useEffect(() => pageChange(), [props.filters]);
+
+    const pageChange = (page) => {
         setPaginationData(null);
 
         const method = (props.method || 'get').toLowerCase();
@@ -26,17 +29,19 @@ function PaginationTable(props) {
         ];
 
         API[method](...methodArgs)
-            .then(res => setPaginationData(res.data))
+            .then(res => {
+                setPaginationData(res.data);
+            })
             .catch(e => {
                 // todo throw toast error?
                 console.log(e);
                 setError(true);
                 props.onError && props.onError(e);
             });
-    }, [page, props.filters]);
+    }
 
     if (!paginationData && !error)
-        return <div>Loading</div>; // todo return loader
+        return <Loader isLoading={true}/>;
 
     return (
         <>
@@ -49,10 +54,11 @@ function PaginationTable(props) {
                 {!!props.render && !error && props.render(paginationData.data)}
             </table>
 
-            {!error && !!paginationData && (
+            {!error && (
                 <Pagination
-                    currentPage={paginationData.last_page}
-                    lastPage={paginationData.current_page}
+                    pageChange={(page) => pageChange(page)}
+                    currentPage={paginationData.current_page}
+                    lastPage={paginationData.last_page}
                 />
             )}
         </>

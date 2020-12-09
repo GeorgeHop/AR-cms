@@ -12,4 +12,6 @@ export const Routes = {
     AdminsCreate: '/admins/create',
     AdminsEdit: (id = ':id') => `/admins/${id}/edit`,
     ScenarioConstructor: '/scenario-constructor',
+    UsersList: '/users',
+    Login: '/login'
 };
