@@ -23,9 +23,9 @@ const Header = ({name}) => {
                 </Button>
             </Navbar.Collapse>
             <Nav className='justify-content-end'>
-                <Button size='sm' variant='light'>
+                <NavLink className='btn btn-dark btn-sm' to={Routes.Login}>
                     Log out
-                </Button>
+                </NavLink>
             </Nav>
         </Navbar>
     );

@@ -16,7 +16,7 @@ const PageHeader = ({buttonLabel, title, buttonRoute, notification}) => {
             <Row className='m-1 justify-content-between'>
                 <h4 className='m-1'>{title}</h4>
                 {!!buttonLabel &&
-                <Button className='btn-sm' onClick={() => history.push(buttonRoute)}>{buttonLabel}</Button>
+                    <Button className='btn-sm' onClick={() => history.push(buttonRoute)}>{buttonLabel}</Button>
                 }
             </Row>
         </>
