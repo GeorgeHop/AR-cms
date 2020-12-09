@@ -6,13 +6,13 @@ import API from "../../helpers/API";
 
 const AdminDetails = props => {
     const location = window.location;
-    const isEdit = location.pathname.includes('/admins-edit/');
+    const isEdit = location.pathname.includes('/edit');
     const pageId = isEdit ? props.match.params.id : '';
     const history = useHistory();
     const [userName, setUserName] = React.useState('');
     const [userRole, setUserRole] = React.useState('');
     const [email, setEmail] = React.useState('');
-
+    const [notification, setNotification] = React.useState('');
 
     React.useEffect(() => getAdminData(), [isEdit]);
 
@@ -25,20 +25,20 @@ const AdminDetails = props => {
             };
 
             API.post('/admins', userData)
-                .then(history.push(Routes.Admins))
+                .then((res) => history.push(Routes.Admins))
                 .catch(console.log)
         }
     };
 
-    const editAdmin = (id, email, userName, userRole) => {
+    const editAdmin = (email, userName, userRole) => {
         let userData = {
             'user_name': userName,
             'user_role': userRole,
             'email': email
         };
 
-        API.put('/admins/' + id, userData)
-            .then(console.log)
+        API.put('/admins/' + pageId, userData)
+            .then(res => setNotification(res.data))
             .catch(console.log)
     };
 
@@ -55,7 +55,10 @@ const AdminDetails = props => {
 
     return (
         <>
-            <PageHeader title={isEdit ? `Edit admin ${userName}` : 'Create New Admin'}/>
+            <PageHeader
+                title={isEdit ? `Edit admin ${userName}` : 'Create New Admin'}
+                notification={notification}
+            />
             <div className='col-md-5'>
                 <form>
                     <div className='form-group'>
@@ -79,8 +82,13 @@ const AdminDetails = props => {
                     </div>
                     <div className='form-group'>
                         <label htmlFor='adminEmail'>Email</label>
-                        <input type='email' value={email} onChange={e => setEmail(e.target.value)}
-                               className='form-control' id='adminEmail'/>
+                        <input
+                            type='email'
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            className='form-control'
+                            id='adminEmail'
+                        />
                     </div>
                     <div className='form-group'>
                         <button
