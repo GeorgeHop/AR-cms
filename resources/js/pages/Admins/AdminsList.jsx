@@ -14,7 +14,12 @@ const AdminsList = () => {
 
     React.useEffect(() => pageChange(), []);
 
-    const deleteUser = id => {
+    const deleteUser = (id, name) => {
+        let result = confirm(`Are you sure do you want to delete ${name} ?`);
+
+        if (!result)
+            return;
+
         API.delete('/admins/' + id)
             .then(() => {
                 pageChange();
@@ -44,15 +49,19 @@ const AdminsList = () => {
 
     return (
         <div>
-            <PageHeader title={'Admins List'} buttonLabel={'Add New Admin'} buttonRoute={Routes.AdminsCreate}/>
+            <PageHeader
+                title={'Admins List'}
+                buttonLabel={'Add New Admin'}
+                buttonRoute={Routes.AdminsCreate}
+            />
             <table className="table">
                 <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Username</th>
-                        <th>User role</th>
-                        <th>Actions</th>
-                    </tr>
+                <tr>
+                    <th>id</th>
+                    <th>Username</th>
+                    <th>User role</th>
+                    <th>Actions</th>
+                </tr>
                 </thead>
                 <tbody>
                 {users.map((user, index) => (
@@ -64,7 +73,7 @@ const AdminsList = () => {
                             <NavLink type="button" to={Routes.AdminsEdit(user.id)}
                                      className="btn btn-info btn-sm m-1">Edit
                             </NavLink>
-                            <button type="button" onClick={() => deleteUser(user.id)}
+                            <button type="button" onClick={() => deleteUser(user.id, user.user_name)}
                                     className="btn btn-danger btn-sm m-1">Delete
                             </button>
                         </td>
