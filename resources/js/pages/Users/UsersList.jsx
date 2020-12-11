@@ -19,7 +19,13 @@ const UsersList = () => {
                 <tr key={index}>
                     <th scope="row">{user.id}</th>
                     <td>{user.user_name}</td>
-                    <td>{user.user_role}</td>
+                    <td>
+                        <select className="form-control" id="admin-role">
+                            <option value={'Admin'}>Admin</option>
+                            <option value={'Scenarist'}>Scenarist</option>
+                            <option value={'Support'}>Support</option>
+                        </select>
+                    </td>
                     <td>
                         <NavLink type="button" to={'/'}
                                  className="btn btn-info btn-sm m-1">Edit

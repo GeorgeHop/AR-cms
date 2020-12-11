@@ -31,7 +31,7 @@ const AdminsList = () => {
                 <tr key={index}>
                     <th scope="row">{user.id}</th>
                     <td>{user.user_name}</td>
-                    <td>{user.user_role}</td>
+                    <td>{user.user_role || 'N/A'}</td>
                     <td>
                         <NavLink type="button" to={Routes.AdminsEdit(user.id)}
                                  className="btn btn-info btn-sm m-1">Edit

@@ -1,7 +1,7 @@
 import React from 'react';
-import PageHeader from "../components/MainLayout/PageHeader";
-import DragBox from "../components/ScenarioConstructor/DragBox";
-import DragContainer from "../components/ScenarioConstructor/DragContainer";
+import PageHeader from "../../components/MainLayout/PageHeader";
+import DragBox from "../../components/ScenarioConstructor/DragBox";
+import DragContainer from "../../components/ScenarioConstructor/DragContainer";
 
 const ScenarioConstructor = () => {
     const [mouseTop, setMouseTop] = React.useState(0);

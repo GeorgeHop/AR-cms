@@ -8,10 +8,10 @@ import {Routes} from "./helpers/constants";
 import Login from "./pages/Login";
 import AdminsList from "./pages/Admins/AdminsList";
 import AdminDetails from "./pages/Admins/AdminDetails";
-import ScenarioConstructor from "./pages/ScenarionConstructor";
 import UsersList from "./pages/Users/UsersList";
 import Registration from "./pages/Registration";
 import AuthRoute from "./routing/AuthRoute";
+import ScenarioConstructor from "./pages/Scenarist/ScenarionConstructor";
 
 const App = () => (
     <Provider store={store}>
