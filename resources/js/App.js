@@ -10,26 +10,29 @@ import AdminsList from "./pages/Admins/AdminsList";
 import AdminDetails from "./pages/Admins/AdminDetails";
 import ScenarioConstructor from "./pages/ScenarionConstructor";
 import UsersList from "./pages/Users/UsersList";
+import Registration from "./pages/Registration";
+import AuthRoute from "./routing/AuthRoute";
 
 const App = () => (
     <Provider store={store}>
         <Router>
             <Switch>
+                <Route exact path={'/registration'} component={Registration}/>
                 <Route exact path={'/login'} component={Login}/>
                 {/*Routes for main Layout*/}
                 <Route>
                     <MainLayout appName={'AR-cms'}>
                         <Switch>
                             {/* Dashboard */}
-                            <Route exact path={Routes.Dashboard} component={HomePage}/>
+                            <AuthRoute exact path={Routes.Dashboard} component={HomePage}/>
                             {/* Admin pages */}
-                            <Route exact path={Routes.Admins} component={AdminsList}/>
-                            <Route exact path={Routes.AdminsEdit()} component={AdminDetails}/>
-                            <Route exact path={Routes.AdminsCreate} component={AdminDetails}/>
+                            <AuthRoute exact path={Routes.Admins} component={AdminsList}/>
+                            <AuthRoute exact path={Routes.AdminsEdit()} component={AdminDetails}/>
+                            <AuthRoute exact path={Routes.AdminsCreate} component={AdminDetails}/>
                             {/* Users pages */}
-                            <Route exact path={Routes.UsersList} component={UsersList}/>
+                            <AuthRoute exact path={Routes.UsersList} component={UsersList}/>
 
-                            <Route exact path={Routes.ScenarioConstructor} component={ScenarioConstructor}/>
+                            <AuthRoute exact path={Routes.ScenarioConstructor} component={ScenarioConstructor}/>
                         </Switch>
                     </MainLayout>
                 </Route>
