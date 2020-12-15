@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -26,7 +27,7 @@ class UserController extends Controller
     }
 
     public function update(User $user): User {
-        $user->fill($this->validateRequest())->save();
+        $user->fill($this->validateRequest($user))->save();
         return $user;
     }
 
@@ -35,10 +36,10 @@ class UserController extends Controller
         return response()->json();
     }
 
-    private function validateRequest(): array {
+    private function validateRequest(User $user = null): array {
         return request()->validate([
-            'username' => ['required', 'unique'],
-            'email' => ['required', 'unique'],
+            'username' => ['required', Rule::unique('users')->ignore($user)],
+            'email' => ['required', Rule::unique('users')->ignore($user)],
         ]);
     }
 }
