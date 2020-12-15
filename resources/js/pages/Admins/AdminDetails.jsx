@@ -19,7 +19,7 @@ const AdminDetails = props => {
     const createNewAdmin = (email, userName, userRole) => {
         if (!!email && !!userName && !!userRole) {
             let userData = {
-                'user_name': userName,
+                'username': userName,
                 'user_role': userRole,
                 'email': email
             };
@@ -32,7 +32,7 @@ const AdminDetails = props => {
 
     const editAdmin = (email, userName, userRole) => {
         let userData = {
-            'user_name': userName,
+            'username': userName,
             'user_role': userRole,
             'email': email
         };
@@ -46,7 +46,7 @@ const AdminDetails = props => {
         if (!!pageId) {
             API.get('/admins/' + pageId + '/edit')
                 .then((response) => {
-                    setUserName(response.data.user_name);
+                    setUserName(response.data.username);
                     setUserRole(response.data.user_role);
                     setEmail(response.data.email);
                 }).catch(console.log);

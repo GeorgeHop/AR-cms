@@ -30,13 +30,13 @@ const AdminsList = () => {
             {admins.map((user, index) => (
                 <tr key={index}>
                     <th scope="row">{user.id}</th>
-                    <td>{user.user_name}</td>
+                    <td>{user.username}</td>
                     <td>{user.user_role || 'N/A'}</td>
                     <td>
                         <NavLink type="button" to={Routes.AdminsEdit(user.id)}
                                  className="btn btn-info btn-sm m-1">Edit
                         </NavLink>
-                        <button type="button" onClick={() => deleteUser(user.id, user.user_name)}
+                        <button type="button" onClick={() => deleteUser(user.id, user.username)}
                                 className="btn btn-danger btn-sm m-1">Delete
                         </button>
                     </td>

@@ -38,15 +38,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'user_name' => 'required',
+            'username' => 'required',
             'user_role' => 'required',
-            'email' => 'required'
+            'email' => 'required',
         ]);
 
         $user = User::create([
-            'user_name' => $validateData['user_name'],
+            'username' => $validateData['username'],
             'user_role' => $validateData['user_role'],
-            'email' => $validateData['email']
+            'email' => $validateData['email'],
         ]);
 
         return 'User was added';
@@ -86,7 +86,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $updatedUser = User::find($id);
-        $updatedUser->user_name = $request->get('user_name');
+        $updatedUser->username = $request->get('username');
         $updatedUser->user_role = $request->get('user_role');
         $updatedUser->email = $request->get('email');
         $updatedUser->save();

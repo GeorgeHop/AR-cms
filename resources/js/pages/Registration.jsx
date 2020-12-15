@@ -15,7 +15,7 @@ const Registration = () => {
             email: email,
             password: password,
             password_confirmation: confirm,
-            user_name: name,
+            username: name,
         }).then((res) => {
             history.push(Routes.Login);
         }).catch(console.log)

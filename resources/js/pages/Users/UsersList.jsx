@@ -18,7 +18,7 @@ const UsersList = () => {
             {users.map((user, index) => (
                 <tr key={index}>
                     <th scope="row">{user.id}</th>
-                    <td>{user.user_name}</td>
+                    <td>{user.username}</td>
                     <td>
                         <select className="form-control" id="admin-role">
                             <option value={'Admin'}>Admin</option>
