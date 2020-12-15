@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Class User
@@ -14,7 +15,7 @@ use Laravel\Passport\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use HasFactory, HasApiTokens;
+    use HasFactory, HasApiTokens, HasRoles;
 
     protected $perPage = 10;
 
@@ -27,4 +28,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    protected $with = ['roles'];
 }
