@@ -45,7 +45,7 @@ function PaginationTable(props) {
 
     return (
         <>
-            <table className="table">
+            <table className="table table-sm">
                 {error && (
                     <tr>
                         <p>Something went wrong</p>
