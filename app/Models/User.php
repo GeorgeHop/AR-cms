@@ -16,6 +16,8 @@ class User extends Authenticatable
 {
     use HasFactory, HasApiTokens;
 
+    protected $perPage = 10;
+
     protected $fillable = ([
         'username',
         'email',
@@ -23,6 +25,6 @@ class User extends Authenticatable
     ]);
 
     protected $hidden = [
-        'password'
+        'password',
     ];
 }
