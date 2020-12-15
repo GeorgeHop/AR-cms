@@ -10,7 +10,6 @@ const AdminDetails = props => {
     const pageId = isEdit ? props.match.params.id : '';
     const history = useHistory();
     const [userName, setUserName] = React.useState('');
-    const [userRole, setUserRole] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [notification, setNotification] = React.useState('');
 
@@ -20,7 +19,6 @@ const AdminDetails = props => {
         if (!!email && !!userName && !!userRole) {
             let userData = {
                 'username': userName,
-                'user_role': userRole,
                 'email': email
             };
 
@@ -33,12 +31,11 @@ const AdminDetails = props => {
     const editAdmin = (email, userName, userRole) => {
         let userData = {
             'username': userName,
-            'user_role': userRole,
             'email': email
         };
 
         API.put('/admins/' + pageId, userData)
-            .then(res => setNotification(res.data))
+            .then(res => setNotification('Edited')) // fixme notification message
             .catch(console.log)
     };
 
@@ -47,7 +44,6 @@ const AdminDetails = props => {
             API.get('/admins/' + pageId + '/edit')
                 .then((response) => {
                     setUserName(response.data.username);
-                    setUserRole(response.data.user_role);
                     setEmail(response.data.email);
                 }).catch(console.log);
         }
@@ -73,8 +69,7 @@ const AdminDetails = props => {
                     </div>
                     <div className='form-group'>
                         <label htmlFor="admin-role">Admin role</label>
-                        <select className="form-control" id="admin-role" value={userRole}
-                                onChange={e => setUserRole(e.target.value)}>
+                        <select className="form-control" id="admin-role">
                             <option value={'Admin'}>Admin</option>
                             <option value={'Scenarist'}>Scenarist</option>
                             <option value={'Support'}>Support</option>
@@ -95,8 +90,8 @@ const AdminDetails = props => {
                             type="button"
                             onClick={
                                 () => isEdit
-                                    ? editAdmin(email, userName, userRole)
-                                    : createNewAdmin(email, userName, userRole)
+                                    ? editAdmin(email, userName)
+                                    : createNewAdmin(email, userName)
                             }
                             className="btn btn-outline-primary">
                             {isEdit ? `Edit admin` : 'Create New Admin'}
