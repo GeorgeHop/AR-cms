@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,6 +14,8 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run() {
+        Artisan::call('passport:install');
+        Role::seed();
         $this->call(UserSeeder::class);
     }
 }

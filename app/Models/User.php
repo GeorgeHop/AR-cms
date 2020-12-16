@@ -19,15 +19,13 @@ class User extends Authenticatable
 
     protected $perPage = 10;
 
-    protected $fillable = ([
+    protected $fillable = [
         'username',
         'email',
         'password',
-    ]);
-
-    protected $hidden = [
-        'password',
     ];
+
+    protected $hidden = ['password'];
 
     protected $with = ['roles'];
 }
