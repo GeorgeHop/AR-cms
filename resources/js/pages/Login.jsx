@@ -2,8 +2,10 @@ import React from 'react';
 import API from "../helpers/API";
 import {useHistory} from 'react-router-dom';
 import {Routes} from "../helpers/constants";
+import {logIn} from "../redux/actions/userAction";
+import {connect} from "react-redux";
 
-const Login = () => {
+const Login = ({dispatch}) => {
     const history = useHistory();
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -13,13 +15,22 @@ const Login = () => {
             email: email,
             password: password,
         }).then((res) => {
-            localStorage.setItem('userData', JSON.stringify({
-                'userToken': res.data.access_token,
-                'expiresDate': res.data.expires_at
-            }));
-            history.push(Routes.Dashboard);
-            console.log(res);
-        }).catch(console.log)
+            API.get('/user', {
+                headers: {
+                    Authorization: 'Bearer ' + res.data.access_token
+                }
+            }).then(response => {
+                localStorage.setItem('userData', JSON.stringify({
+                    ...response.data,
+                    ...res.data
+                }));
+
+                if (response.status === 200 && Object.keys(response.data).length !== 0) {
+                    dispatch(logIn(JSON.parse(localStorage.getItem('userData'))));
+                    history.push(Routes.Dashboard);
+                }
+            });
+        }).catch(console.log);
     }
 
     return (
@@ -52,4 +63,6 @@ const Login = () => {
     )
 }
 
-export default Login;
+export default connect(state => ({
+    user: state.user
+}))(Login);

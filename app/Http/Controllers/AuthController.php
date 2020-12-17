@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Carbon\Carbon;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -32,38 +33,31 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-            'remember_me' => 'boolean'
-        ]);
+        $client = DB::table('oauth_clients')->where('id', 2)->first();
 
-        $credentials = request(['email', 'password']);
+        $http = new Client();
 
-        if (!Auth::attempt($credentials)) {
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
+        try {
+            $response = $http->post('http://AR-CMS.test/oauth/token', [
+                'form_params' => [
+                    'grant_type' => 'password',
+                    'client_id' => $client->id,
+                    'client_secret' => $client->secret,
+                    'username' => $request->input('email'),
+                    'password' => $request->input('password'),
+                    'scope' => ''
+                ],
+            ]);
+
+            $tokens = json_decode((string)$response->getBody(), true);
+        } catch (ClientException $e) {
+            if ($e->getResponse()->getStatusCode() === 401) {
+                return response()->json('Invalid data', 401);
+            }
+            throw $e;
         }
 
-        $user = $request->user();
-
-        $tokenResult = $user->createToken('Personal Access Token');
-        $token = $tokenResult->token;
-
-        if ($request->remember_me) {
-            $token->exires_at = Carbon::now()->addWeeks(1);
-        }
-
-        $token->save();
-
-        return response()->json([
-            'access_token' => $tokenResult->accessToken,
-            'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse(
-                $tokenResult->token->expires_at
-            )->toDateTimeString()
-        ]);
+        return response()->json($tokens);
     }
 
     public function logout(Request $request)

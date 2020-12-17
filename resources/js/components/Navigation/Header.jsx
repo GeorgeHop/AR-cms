@@ -4,10 +4,17 @@ import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import Nav from "react-bootstrap/Nav";
 import SidebarToggle from "./SidebarToggle";
-import {NavLink} from "react-router-dom";
+import {NavLink, useHistory} from "react-router-dom";
 import {Routes} from "../../helpers/constants";
 
 const Header = ({name}) => {
+    const history = useHistory();
+
+    const LogOut = () => {
+        localStorage.clear();
+        history.push('/login');
+    }
+
     return (
         <Navbar bg="light" expand="lg" className='main-header'>
             <SidebarToggle/><Navbar.Brand><NavLink to={Routes.Dashboard}>{name}</NavLink></Navbar.Brand>
@@ -23,9 +30,9 @@ const Header = ({name}) => {
                 </Button>
             </Navbar.Collapse>
             <Nav className='justify-content-end'>
-                <NavLink className='btn btn-dark btn-sm' to={Routes.Login}>
+                <Button className='btn btn-dark btn-sm' onClick={() => LogOut()}>
                     Log out
-                </NavLink>
+                </Button>
             </Nav>
         </Navbar>
     );
