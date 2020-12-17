@@ -11,6 +11,7 @@
 }
 
 .content-inner-shadow {
+    height: calc(100% - 60px);
     -webkit-box-shadow: inset 1px 1px 5px 0px rgba(0, 0, 0, 0.21);
     box-shadow: inset 1px 1px 5px 0px rgba(0, 0, 0, 0.21);
 }

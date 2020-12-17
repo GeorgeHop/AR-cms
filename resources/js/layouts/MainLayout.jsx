@@ -11,7 +11,7 @@ const MainLayout = ({isOpen, children, isLoading}) => (
             <Sidebar/>
             <div id={'content'} className={classnames('bg-light', {open: isOpen})}>
                 <Header name={SiteName}/>
-                <div className="h-100 p-3 content-inner-shadow">
+                <div className="p-3 content-inner-shadow">
                     {children}
                 </div>
             </div>
