@@ -41,7 +41,7 @@ function PaginationTable(props) {
     }
 
     if (!paginationData && !error)
-        return <Loader isLoading={true}/>;
+        return <Loader/>;
 
     return (
         <>

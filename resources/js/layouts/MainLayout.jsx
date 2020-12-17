@@ -5,7 +5,7 @@ import * as classnames from "classnames";
 import {connect} from "react-redux";
 import {SiteName} from "../helpers/constants";
 
-const MainLayout = ({isOpen, children, isLoading}) => (
+const MainLayout = ({isOpen, children}) => (
     <>
         <div className={'d-flex'}>
             <Sidebar/>

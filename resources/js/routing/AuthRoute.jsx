@@ -14,7 +14,7 @@ const AuthRoute = ({component: Component, ...rest}) => {
     return (
         <Route {...rest} render={matchProps => {
             if (isAuthenticated === null)
-                return <Loader isLoading={true}/>
+                return <Loader/>
 
             return isAuthenticated
                 ? <Component {...matchProps}/>
