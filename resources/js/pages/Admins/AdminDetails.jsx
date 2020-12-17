@@ -15,34 +15,26 @@ const AdminDetails = props => {
 
     React.useEffect(() => getAdminData(), [isEdit]);
 
-    const createNewAdmin = (email, userName, userRole) => {
-        if (!!email && !!userName && !!userRole) {
+    const handleAdminData = () => {
+        if (!!email && !!userName) {
             let userData = {
                 'username': userName,
                 'email': email
             };
+            const method = isEdit ? 'put' : 'post';
 
-            API.post('/admins', userData)
-                .then((res) => history.push(Routes.Admins))
-                .catch(console.log)
+            API[method](isEdit ? `/admins/${pageId}` : '/admins', userData)
+                .then(res => isEdit ? '' : history.push(Routes.Admins)).catch((console.log));
+        } else {
+            alert('Please fill out all required fields');
         }
-    };
-
-    const editAdmin = (email, userName, userRole) => {
-        let userData = {
-            'username': userName,
-            'email': email
-        };
-
-        API.put('/admins/' + pageId, userData)
-            .then(res => setNotification('Edited')) // fixme notification message
-            .catch(console.log)
-    };
+    }
 
     const getAdminData = () => {
         if (!!pageId) {
-            API.get('/admins/' + pageId + '/edit')
+            API.get('/users/' + pageId)
                 .then((response) => {
+                    console.log(response)
                     setUserName(response.data.username);
                     setEmail(response.data.email);
                 }).catch(console.log);
@@ -88,11 +80,7 @@ const AdminDetails = props => {
                     <div className='form-group'>
                         <button
                             type="button"
-                            onClick={
-                                () => isEdit
-                                    ? editAdmin(email, userName)
-                                    : createNewAdmin(email, userName)
-                            }
+                            onClick={() => handleAdminData()}
                             className="btn btn-outline-primary">
                             {isEdit ? `Edit admin` : 'Create New Admin'}
                         </button>
