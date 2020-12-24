@@ -9,13 +9,17 @@ const AuthRoute = ({component: Component, user, dispatch, ...rest}) => {
     const [isAuthenticated, setIsAuthenticated] = React.useState(null);
 
     React.useEffect(() => {
-        dispatch(logIn(JSON.parse(localStorage.getItem('userData'))));
-        setIsAuthenticated(true);
+        if (user.user === null || Object.keys(user.user).length === 0) {
+            dispatch(logIn(JSON.parse(localStorage.getItem('userData'))));
+            setIsAuthenticated(true);
+        } else {
+            setIsAuthenticated(false);
+        }
     }, [window.performance.navigation.type === 1]);
 
     return (
         <Route {...rest} render={matchProps => {
-            if (isAuthenticated === null && Object.keys(user.user).length === 0)
+            if (isAuthenticated === null)
                 return <Loader/>
 
             return isAuthenticated
