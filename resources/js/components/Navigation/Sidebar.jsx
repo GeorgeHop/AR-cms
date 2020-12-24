@@ -11,7 +11,7 @@ const Sidebar = ({isOpen}) => {
 
     return (
         <nav id='sidebar'
-             className={classnames({open: isOpen}, "col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar")}>
+             className={classnames({open: isOpen}, " d-none d-sm-block bg-light sidebar")}>
             <div className='m-1 w-100 user-info'>
                 User Name
             </div>
