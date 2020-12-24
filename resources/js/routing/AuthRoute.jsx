@@ -9,8 +9,12 @@ const AuthRoute = ({component: Component, user, dispatch, ...rest}) => {
     const [isAuthenticated, setIsAuthenticated] = React.useState(null);
 
     React.useEffect(() => {
-        if (user.user === null || Object.keys(user.user).length === 0) {
+        let isEmptyData = Object.keys(user.user).length === 0;
+
+        if (user.user === null || isEmptyData) {
             dispatch(logIn(JSON.parse(localStorage.getItem('userData'))));
+            setIsAuthenticated(true);
+        } else if (!isEmptyData) {
             setIsAuthenticated(true);
         } else {
             setIsAuthenticated(false);
